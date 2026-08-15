@@ -1,0 +1,16 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f8;
+}
+
+.home-container h1 {
+  font-size: 32px;
+}
+
+.home-container p {
+  color: #666;
+}
