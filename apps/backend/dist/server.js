@@ -1,16 +1,16 @@
 import { pool } from "./config/database.js";
-async function testDatabase() {
+import { createDefaultAdmin } from "./services/admin.service.js";
+async function startServer() {
     try {
-        const result = await pool.query("SELECT NOW()");
+        await pool.query("SELECT NOW()");
         console.log(" Base de datos conectada");
-        console.log("Hora de PostgreSQL:", result.rows[0]);
+        await createDefaultAdmin();
+        console.log(" Backend iniciado");
     }
     catch (error) {
-        console.error(" Error conectando a PostgreSQL:", error);
-    }
-    finally {
-        await pool.end();
+        console.error(" Error iniciando el backend:", error);
+        process.exit(1);
     }
 }
-testDatabase();
+startServer();
 //# sourceMappingURL=server.js.map
