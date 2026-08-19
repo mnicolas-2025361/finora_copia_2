@@ -102,6 +102,30 @@
           el control de tus gastos.
         </p>
 
+        @if (sessionExpired) {
+
+          <div class="session-expired">
+
+            <span class="session-icon">
+              !
+            </span>
+
+            <div>
+
+              <strong>
+                Sesión caducada
+              </strong>
+
+              <p>
+                Tu sesión ha expirado.
+                Por favor, inicia sesión nuevamente.
+              </p>
+
+            </div>
+
+          </div>
+
+        }
 
         <form (ngSubmit)="login()">
 
@@ -214,4 +238,3 @@
   </main>
 
 </div>
-```
