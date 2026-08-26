@@ -1,353 +1,78 @@
-<div class="home-page">
+<div class="home">
 
-  <!-- Fondo decorativo -->
-  <div class="orb orb-one"></div>
-  <div class="orb orb-two"></div>
-  <div class="grid"></div>
-
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <header class="header">
 
     <div class="logo">
-      <div class="logo-mark">F</div>
-      <span>finora</span>
+      <img src="/logo_finora_sin_nada.png" alt="Finora">
     </div>
 
-    <nav class="nav-links">
+    <nav>
       <a class="active">Inicio</a>
       <a>Gastos</a>
       <a>Ingresos</a>
-      <a>Reportes</a>
     </nav>
-
-    <div class="user-area">
-
-      <div class="user-profile">
-        <div class="avatar">
-          M
-        </div>
-
-        <div class="user-info">
-          <strong>Marcos</strong>
-          <small>Usuario</small>
-        </div>
-
-        <span class="arrow">⌄</span>
-      </div>
-
-    </div>
 
   </header>
 
+  <main class="content">
 
-  <!-- CONTENIDO -->
-  <main class="dashboard">
+    <div class="Bienvenida">
 
-    <!-- SALUDO -->
-    <section class="welcome-section">
+      <h1>
+        Bienvenido de nuevo
+      </h1>
 
-      <div>
-        <span class="small-title">
-          TU ESPACIO FINANCIERO
-        </span>
+      <p>
+        Revisa el estado de tus finanzas este mes.
+      </p>
+    </div>
 
-        <h1>
-          Hola, <span>Marcos.</span>
-        </h1>
+    <section class="cards">
 
-        <p>
-          Aquí tienes un resumen de cómo van tus finanzas.
-        </p>
-      </div>
+      <div class="card">
+        <p>Saldo disponible</p>
 
-      <button class="add-button">
-        <span>+</span>
-        Registrar gasto
-      </button>
-
-    </section>
-
-
-    <!-- TARJETAS PRINCIPALES -->
-    <section class="summary-grid">
-
-      <div class="summary-card balance-card">
-
-        <div class="card-header">
-          <span>Balance disponible</span>
-          <div class="card-icon green-icon">Q</div>
-        </div>
-
-        <strong class="main-value">
-          Q 5,240.50
-        </strong>
-
-        <div class="balance-status">
-          <span>↗</span>
-          <strong>+12.8%</strong>
-          <small>vs. mes anterior</small>
-        </div>
+        <h2>Q 5,240.50</h2>
 
       </div>
 
 
-      <div class="summary-card">
+      <div class="card">
+        <p>Ingresos</p>
 
-        <div class="card-header">
-          <span>Ingresos</span>
-          <div class="card-icon purple-icon">↗</div>
-        </div>
-
-        <strong class="main-value">
-          Q 8,500.00
-        </strong>
-
-        <p class="card-description">
-          Ingresos de este mes
-        </p>
+        <h2>Q 8,500.00</h2>
 
       </div>
 
 
-      <div class="summary-card">
+      <div class="card">
+        <p>Gastos</p>
 
-        <div class="card-header">
-          <span>Gastos</span>
-          <div class="card-icon red-icon">↘</div>
-        </div>
-
-        <strong class="main-value">
-          Q 3,259.50
-        </strong>
-
-        <p class="card-description">
-          72% del presupuesto utilizado
-        </p>
+        <h2>Q 3,259.50</h2>
 
       </div>
 
     </section>
 
+    <section class="activity">
 
-    <!-- CONTENIDO INFERIOR -->
-    <section class="content-grid">
+      <h2>
+        Últimos movimientos
+      </h2>
 
-
-      <!-- GASTOS RECIENTES -->
-      <div class="panel expenses-panel">
-
-        <div class="panel-header">
-
-          <div>
-            <span class="panel-label">
-              ACTIVIDAD
-            </span>
-
-            <h2>
-              Gastos recientes
-            </h2>
-          </div>
-
-          <button class="view-button">
-            Ver todos →
-          </button>
-
-        </div>
-
-
-        <div class="expense-list">
-
-          <div class="expense">
-
-            <div class="expense-info">
-              <strong>Comida</strong>
-              <small>Hoy · 12:40 PM</small>
-            </div>
-
-            <strong class="expense-value">
-              - Q 85.00
-            </strong>
-
-          </div>
-
-
-          <div class="expense">
-
-            <div class="expense-info">
-              <strong>Transporte</strong>
-              <small>Ayer · 8:20 AM</small>
-            </div>
-
-            <strong class="expense-value">
-              - Q 45.00
-            </strong>
-
-          </div>
-
-
-          <div class="expense">
-            <div class="expense-info">
-              <strong>Compras</strong>
-              <small>17 Ago · 5:15 PM</small>
-            </div>
-
-            <strong class="expense-value">
-              - Q 320.00
-            </strong>
-
-          </div>
-
-
-          <div class="expense">
-
-            <div class="expense-info">
-              <strong>Servicios</strong>
-              <small>16 Ago · 9:00 AM</small>
-            </div>
-
-            <strong class="expense-value">
-              - Q 450.00
-            </strong>
-
-          </div>
-
-        </div>
-
+      <div class="movement">
+        <span>Supermercado</span>
+        <strong>- Q 350.00</strong>
       </div>
 
-
-      <!-- PRESUPUESTO -->
-      <div class="panel budget-panel">
-
-        <div class="panel-header">
-
-          <div>
-            <span class="panel-label">
-              PRESUPUESTO
-            </span>
-
-            <h2>
-              Este mes
-            </h2>
-          </div>
-
-          <div class="budget-percent">
-            72%
-          </div>
-
-        </div>
-
-
-        <div class="budget-circle">
-
-          <div class="circle-content">
-
-            <strong>
-              Q 2,840
-            </strong>
-
-            <span>
-              utilizados
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="budget-info">
-
-          <div>
-            <span>Gastado</span>
-            <strong>Q 2,840.50</strong>
-          </div>
-
-          <div>
-            <span>Disponible</span>
-            <strong>Q 1,159.50</strong>
-          </div>
-
-        </div>
-
-
-        <div class="budget-progress">
-
-          <div class="budget-progress-value"></div>
-
-        </div>
-
-        <p class="budget-message">
-          Vas por buen camino. Aún tienes presupuesto disponible.
-        </p>
-
+      <div class="movement">
+        <span>Salario</span>
+        <strong class="green">+ Q 4,500.00</strong>
       </div>
 
-    </section>
-
-
-    <!-- ACCIONES -->
-    <section class="quick-actions">
-
-      <div class="quick-title">
-        <span class="panel-label">
-          ACCIONES RÁPIDAS
-        </span>
-
-        <h2>
-          ¿Qué quieres hacer?
-        </h2>
-      </div>
-
-
-      <div class="actions-grid">
-
-        <button class="action-card">
-
-          <div class="action-icon green-icon">
-            +
-          </div>
-
-          <div>
-            <strong>Agregar gasto</strong>
-            <small>Registra un nuevo gasto</small>
-          </div>
-
-          <span>→</span>
-
-        </button>
-
-
-        <button class="action-card">
-
-          <div class="action-icon purple-icon">
-            Q
-          </div>
-
-          <div>
-            <strong>Agregar ingreso</strong>
-            <small>Registra dinero recibido</small>
-          </div>
-
-          <span>→</span>
-
-        </button>
-
-
-        <button class="action-card">
-
-          <div class="action-icon blue-icon">
-            ↗
-          </div>
-
-          <div>
-            <strong>Ver reportes</strong>
-            <small>Analiza tus finanzas</small>
-          </div>
-
-          <span>→</span>
-
-        </button>
-
+      <div class="movement">
+        <span>Transporte</span>
+        <strong>- Q 120.00</strong>
       </div>
 
     </section>

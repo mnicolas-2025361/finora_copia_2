@@ -76,7 +76,7 @@ export async function registerUser(data: RegisterData) {
         },
         JWT_SECRET,
         {
-        expiresIn: "1m"
+        expiresIn: "1d"
         }
     );
 

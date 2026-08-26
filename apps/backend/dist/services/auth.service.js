@@ -33,7 +33,7 @@ export async function loginUser(data) {
         userId: user.id,
         role
     }, JWT_SECRET, {
-        expiresIn: "1m"
+        expiresIn: "1d"
     });
     return {
         token,
