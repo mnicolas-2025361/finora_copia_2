@@ -122,42 +122,6 @@
   color: white;
 }
 
-
-/* LOGO */
-
-.logo,
-.mobile-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  font-size: 25px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.logo-mark {
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 13px;
-
-  background: #43e09d;
-
-  color: #07110f;
-
-  font-size: 21px;
-  font-weight: 900;
-
-  box-shadow:
-    0 8px 25px rgba(67,224,157,0.25);
-}
-
-
 /* TEXTO */
 
 .visual-content {
