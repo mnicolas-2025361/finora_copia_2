@@ -76,10 +76,10 @@ export async function registerUser(data: RegisterData) {
         },
         JWT_SECRET,
         {
-        expiresIn: "1d"
+        expiresIn: "1m"
         }
     );
-
+    
     return {
         token,
         user: {

@@ -1,119 +1,101 @@
 <div class="home">
-
   <nav class="navbar">
-
     <div class="navbar_logo">
-
-      <img src="/logo_finora_sin_nada.png">
-
+      <img src="/logo_finora_sin_nada.png" alt="Finora Logo">
       <span class="finora">
         <span class="titulo">finora</span>
         <br>
         <span class="subtitulo">-APLICACION GESTORA DE GASTOS-</span>
       </span>
-
     </div>
 
     <div class="navbar_menu">
       <a href="/home">Inicio</a>
-      <a href="/home">Gastos</a>
-      <a href="/home">Ingresos</a>
-      <a href="/home">Reportes</a>
+      <a href="/gastos">Gastos</a>
+      <a href="/ingresos">Ingresos</a>
+      <a href="/reportes">Reportes</a>
     </div>
-
   </nav>
 
   <div class="contenido">
-
-    <p class="saludo">
-      Bienvenido
+    <h1 class="saludo">
+      <span class="texto-blanco">BIENVENIDO AL</span>
       <br>
-      a Finora
-    </p>
+      <span class="texto-verde">FRONTEND DE FINORA</span>
+    </h1>
 
     <div class="resumen">
-
-      <div class="Saldo"> 
-        SALDO DISPONIBLE:
-        <br>
-        <span class="saldo_Q">Q.</span>
+      <div class="card"> 
+        <div class="card-title">SALDO DISPONIBLE</div>
+        <div class="card-amount">Q. 5,240.50</div>
       </div>
-
-      <div class="ingreso"> 
-        INGRESO DE ESTE MES:
-        <br>
-        <span class="ingreso_Q">Q.</span>
+      <div class="card"> 
+        <div class="card-title">INGRESO DE ESTE MES</div>
+        <div class="card-amount">Q. 8,500.00</div>
       </div>
-
-      <div class="gasto"> 
-        GASTO DE ESTE MES:
-        <br>
-        <span class="gasto_Q">Q.</span>
+      <div class="card"> 
+        <div class="card-title">GASTOS DE ESTE MES</div>
+        <div class="card-amount">Q. 3,259.50</div>
       </div>
     </div>
 
     <div class="resumenes">
-
-      <div class="gastos_recientes">
-        GASTOS RECIENTES:
-        <br>
-        <span class="gastos_recientes_Q">   </span>
-        <span class="gastos_recientes_fecha">   </span>
-        <span class="gastos_recientes_descripcion">   </span>
-        <span class="gastos_recientes_categoria">   </span>
+      <!-- Lista de Gastos -->
+      <div class="card-lista">
+        <h2>Gastos Recientes</h2>
+        <div class="lista-item">
+          <span>Comida</span>
+          <span>Q 85.00</span>
+        </div>
+        <div class="lista-item">
+          <span>Transporte</span>
+          <span>Q 45.00</span>
+        </div>
+        <div class="lista-item">
+          <span>Compras</span>
+          <span>Q 320.00</span>
+        </div>
+        <div class="lista-item">
+          <span>Servicios</span>
+          <span>Q 450.00</span>
+        </div>
       </div>
 
-      <div class="ingresos_recientes">
-        INGRESOS DE ESTE MES:
-        <br>
-        <span class="ingresos_recientes_Q">   </span>
-        <span class="ingresos_recientes_fecha">   </span>
-        <span class="ingresos_recientes_descripcion">   </span>
-        <span class="ingresos_recientes_categoria">   </span>
+      <!-- Lista de Ingresos -->
+      <div class="card-lista">
+        <h2>Ingresos Realizados</h2>
+        <div class="lista-item">
+          <span>Salario</span>
+          <span>Q 7,000.00</span>
+        </div>
+        <div class="lista-item">
+          <span>Freelance</span>
+          <span>Q 1,500.00</span>
+        </div>
       </div>
 
+      <!-- Gráfica -->
       <div class="grafica-container">
-
         <h2>Presupuesto: Este Mes</h2>
-
         <div class="grafica">
+          <!-- Canvas para Chart.js -->
           <canvas id="presupuestoChart"></canvas>
+          <!-- Texto central simulado para el CSS -->
+          <div class="grafica-centro">
+            <span class="monto">Q 2,183.87</span><br>utilizados
+          </div>
         </div>
-
         <div class="leyenda">
-          <span>
-            <i class="gastado"></i>
-            Gastado
-          </span>
-
-          <span>
-            <i class="disponible"></i>
-            Disponible
-          </span>
+          <span><i class="gastado"></i>Gastado</span>
+          <span><i class="disponible"></i>Disponible</span>
         </div>
       </div>
-
     </div>
 
-
-      <div class="botones">
-
-        <button class="boton_gastos">
-          <span class="texto_boton"> + Gastos </span>
-        </button>
-
-        <button class="boton_ingresos">
-          <span class="texto_boton"> + Ingresos </span>
-        </button>
-        
-        <button class="boton_reportes">
-          <span class="texto_boton"> + Reportes </span>
-        </button>
-
-      </div>
-      
-      
-
-
+    <div class="botones">
+      <button class="boton-accion">+ Nuevo Gasto</button>
+      <button class="boton-accion">+ Nuevo Ingreso</button>
+      <button class="boton-accion">+ Realizar Reporte</button>
+    </div>
   </div>
 </div>
