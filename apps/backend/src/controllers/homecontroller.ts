@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 export const obtenerResumenHome = (req: Request, res: Response) => {
   // Aquí puedes hacer la consulta real a tu base de datos para sumar gastos e ingresos del mes

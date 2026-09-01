@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 // Obtener la lista de ingresos recientes para la tabla
 export const obtenerIngresosRecientes = (req: Request, res: Response) => {
