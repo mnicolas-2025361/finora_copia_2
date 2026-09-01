@@ -1,0 +1,291 @@
+<div class="register-page">
+
+  <!-- Decoración de fondo -->
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+  <div class="grid"></div>
+
+  <main class="register-layout">
+
+    <!-- LADO VISUAL -->
+    <section class="visual-section">
+
+      <div class="logo">
+        <div class="logo-mark">
+          F
+        </div>
+
+        <span>finora</span>
+      </div>
+
+      <div class="visual-content">
+
+        <span class="small-title">
+          EMPIEZA HOY
+        </span>
+
+        <h1>
+          Construye una
+          <span>mejor relación</span>
+          con tu dinero.
+        </h1>
+
+        <p>
+          Registra tus gastos, conoce tus hábitos financieros
+          y empieza a tomar el control de tus finanzas.
+        </p>
+
+      </div>
+
+      <!-- Tarjeta decorativa -->
+      <div class="floating-card">
+
+        <div class="card-top">
+          <span>Tu progreso</span>
+          <span class="dots">•••</span>
+        </div>
+
+        <div class="progress-info">
+          <strong>68%</strong>
+          <span>meta mensual</span>
+        </div>
+
+        <div class="progress">
+          <div class="progress-value"></div>
+        </div>
+
+        <div class="card-bottom">
+          <span>Ahorrado</span>
+          <strong>Q 1,850.00</strong>
+        </div>
+
+      </div>
+
+      <!-- Mini estadísticas -->
+      <div class="mini-stats">
+
+        <div class="stat">
+          <span class="stat-icon green">✓</span>
+
+          <div>
+            <small>Control</small>
+            <strong>Activo</strong>
+          </div>
+        </div>
+
+        <div class="stat">
+          <span class="stat-icon purple">+</span>
+
+          <div>
+            <small>Objetivo</small>
+            <strong>Nuevo</strong>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FORMULARIO -->
+    <section class="register-section">
+
+      <div class="register-box">
+
+        <div class="mobile-logo">
+          <div class="logo-mark">F</div>
+          <span>finora</span>
+        </div>
+
+        <div class="welcome">
+          <span class="welcome-line"></span>
+          <span>ÚNETE A FINORA</span>
+        </div>
+
+        <h2>
+          Crea tu cuenta
+        </h2>
+
+        <p class="description">
+          Solo necesitas unos datos para empezar
+          a controlar tus finanzas.
+        </p>
+
+
+        <form (ngSubmit)="register()">
+
+          <!-- NOMBRE -->
+          <div class="field">
+
+            <label for="name">
+              Nombre
+            </label>
+
+            <div class="input-box">
+
+              <div class="input-icon">
+                👤
+              </div>
+
+              <input
+                id="name"
+                type="text"
+                name="name"
+                [(ngModel)]="name"
+                placeholder="Tu nombre"
+                autocomplete="name"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- CORREO -->
+          <div class="field">
+
+            <label for="email">
+              Correo electrónico
+            </label>
+
+            <div class="input-box">
+
+              <div class="input-icon">
+                @
+              </div>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                [(ngModel)]="email"
+                placeholder="tu@correo.com"
+                autocomplete="email"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- CONTRASEÑA -->
+          <div class="field">
+
+            <label for="password">
+              Contraseña
+            </label>
+
+            <div class="input-box">
+
+              <div class="input-icon">
+                ●
+              </div>
+
+              <input
+                id="password"
+                type="password"
+                name="password"
+                [(ngModel)]="password"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="new-password"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- CONFIRMAR CONTRASEÑA -->
+          <div class="field">
+
+            <label for="confirmPassword">
+              Confirmar contraseña
+            </label>
+
+            <div class="input-box">
+
+              <div class="input-icon">
+                ✓
+              </div>
+
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                [(ngModel)]="confirmPassword"
+                placeholder="Repite tu contraseña"
+                autocomplete="new-password"
+              >
+
+            </div>
+
+          </div>
+
+
+          @if (errorMessage) {
+
+            <div class="error-message">
+              <span>!</span>
+              {{ errorMessage }}
+            </div>
+
+          }
+
+
+          @if (message) {
+
+            <div class="success-message">
+              <span>✓</span>
+              {{ message }}
+            </div>
+
+          }
+
+
+          <button
+            class="register-button"
+            type="submit"
+          >
+
+            <span>Crear mi cuenta</span>
+
+            <span class="button-arrow">
+              →
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <div class="divider">
+          <span>o</span>
+        </div>
+
+
+        <p class="login-text">
+
+          ¿Ya tienes una cuenta?
+
+          <button
+            type="button"
+            (click)="goToLogin()"
+          >
+            Iniciar sesión
+          </button>
+
+        </p>
+
+
+        <div class="security">
+          <span>✓</span>
+          Tus datos están protegidos
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
