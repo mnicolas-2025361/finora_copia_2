@@ -1,10 +1,10 @@
-import { Router, type IRouter } from "express";
-import { obtenerIngresosRecientes, crearIngreso } from "../controllers/IngresoController.js";
-import { authenticateToken } from "../middlewares/auth.middleware.js";
+import { Router } from 'express';
+import { authenticateToken } from '../middlewares/auth.middleware.js';
+import { obtenerIngresos, crearIngreso } from '../controllers/Ingreso.controller.js';
 
-const router: IRouter = Router();
+const router: Router = Router();
 
-router.get("/", authenticateToken, obtenerIngresosRecientes);
-router.post("/", authenticateToken, crearIngreso);
+router.get('/ingresos', authenticateToken, obtenerIngresos);
+router.post('/ingresos', authenticateToken, crearIngreso);
 
 export default router;

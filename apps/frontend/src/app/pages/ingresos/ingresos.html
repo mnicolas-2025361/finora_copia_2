@@ -1,1 +1,125 @@
-<p>ingresos works!</p>
+<div class="home">
+
+  <div class="contenido">
+
+    <h1 class="titulo-pagina">
+      <span class="texto-blanco">GESTIÓN DE</span>
+      <br>
+      <span class="texto-verde">INGRESOS</span>
+    </h1>
+
+    <div class="resumen">
+
+      <div class="card">
+        <div class="card-title">INGRESOS TOTALES</div>
+
+        <div class="card-amount">
+          Q. {{ totalIngresos | number:'1.2-2' }}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">INGRESO DE ESTE MES</div>
+
+        <div class="card-amount">
+          Q. {{ ingresoMes | number:'1.2-2' }}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">INGRESOS REGISTRADOS</div>
+
+        <div class="card-amount">
+          {{ ingresos.length }}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-lista">
+
+      <div class="lista-header">
+
+        <div>
+          <h2>Ingresos Realizados</h2>
+          <p>Consulta tus ingresos registrados.</p>
+        </div>
+
+        <button
+          class="boton-accion"
+          (click)="abrirModal()">
+          + Nuevo Ingreso
+        </button>
+
+      </div>
+
+      <input
+        type="text"
+        class="search-input-finora"
+        placeholder="Buscar ingreso..."
+      >
+
+      <br>
+      <br>
+
+      <div class="scrollable-list">
+
+        <div
+          class="lista-item"
+          *ngFor="let ingreso of ingresos">
+
+          <div class="ingreso-info">
+
+            <strong>
+              {{ ingreso.descripcion }}
+            </strong>
+
+            <span class="badge-mini">
+              {{ ingreso.categoria }}
+            </span>
+
+          </div>
+
+          <div class="ingreso-fecha">
+            {{ ingreso.fecha | date:'dd/MM/yyyy' }}
+          </div>
+
+          <div class="ingreso-monto">
+            + Q. {{ ingreso.monto | number:'1.2-2' }}
+          </div>
+
+          <div class="acciones">
+
+            <button class="btn-icon">
+              ✎
+            </button>
+
+            <button class="btn-icon">
+              ×
+            </button>
+
+          </div>
+
+        </div>
+
+        <div
+          *ngIf="ingresos.length === 0"
+          style="text-align: center; padding: 30px; color: #888;">
+
+          No hay ingresos registrados.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+ 
+<app-nuevo-ingreso
+  *ngIf="mostrarModal"
+  (cerrar)="cerrarModal()"
+  (guardadoExitoso)="ingresoGuardado()">
+</app-nuevo-ingreso>

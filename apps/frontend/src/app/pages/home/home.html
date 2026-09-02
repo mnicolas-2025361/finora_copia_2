@@ -10,10 +10,10 @@
     </div>
 
     <div class="navbar_menu">
-      <a href="/home">Inicio</a>
-      <a href="/gastos">Gastos</a>
-      <a href="/ingresos">Ingresos</a>
-      <a href="/reportes">Reportes</a>
+      <a routerLink="/home">Inicio</a>
+      <a routerLink="/gastos">Gastos</a>
+      <a routerLink="/ingresos">Ingresos</a>
+      <a routerLink="/reportes">Reportes</a>
     </div>
   </nav>
 
@@ -27,15 +27,15 @@
     <div class="resumen">
       <div class="card"> 
         <div class="card-title">SALDO DISPONIBLE</div>
-        <div class="card-amount">Q. 5,240.50</div>
+        <div class="card-amount">Q. </div>
       </div>
       <div class="card"> 
         <div class="card-title">INGRESO DE ESTE MES</div>
-        <div class="card-amount">Q. 8,500.00</div>
+        <div class="card-amount">Q.  </div>
       </div>
       <div class="card"> 
         <div class="card-title">GASTOS DE ESTE MES</div>
-        <div class="card-amount">Q. 3,259.50</div>
+        <div class="card-amount">Q. </div>
       </div>
     </div>
 
@@ -92,10 +92,15 @@
       </div>
     </div>
 
-    <div class="botones">
-      <button class="boton-accion">+ Nuevo Gasto</button>
-      <button class="boton-accion">+ Nuevo Ingreso</button>
-      <button class="boton-accion">+ Realizar Reporte</button>
-    </div>
+        <div class="botones">
+          <button class="boton-accion">+ Nuevo Gasto</button>
+          
+          <!-- Usamos la función irANuevoIngreso() que ya definiste en tu home.ts -->
+          <button class="boton-accion" (click)="irANuevoIngreso()">
+            + Nuevo Ingreso
+          </button>
+
+          <button class="boton-accion">+ Realizar Reporte</button>
+        </div>
   </div>
 </div>
