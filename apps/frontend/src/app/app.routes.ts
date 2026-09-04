@@ -4,7 +4,7 @@ import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Home } from './pages/home/home';
 import { IngresosComponent } from './pages/ingresos/ingresos';
-
+  
 export const routes: Routes = [
 
   {

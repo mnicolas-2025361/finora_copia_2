@@ -1,1 +1,1 @@
-{"version":3,"file":"ingreso.routes.d.ts","sourceRoot":"","sources":["../../src/routes/ingreso.routes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAU,KAAK,OAAO,EAAE,MAAM,SAAS,CAAC;AAI/C,QAAA,MAAM,MAAM,EAAE,OAAkB,CAAC;eAKlB,MAAM"}
+{"version":3,"file":"ingreso.routes.d.ts","sourceRoot":"","sources":["../../src/routes/ingreso.routes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAQjC,QAAA,MAAM,MAAM,EAAE,MAAiB,CAAC;eAMjB,MAAM"}

@@ -1,136 +1,342 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { IngresoService, Ingreso } from '../../services/ingreso.service.js';
 
 @Component({
-  selector: 'app-nuevo-ingreso',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
-    <div class="modal-overlay">
+selector: 'app-nuevo-ingreso',
+standalone: true,
+imports: [CommonModule, FormsModule],
 
-      <div class="modal-card">
+template: ` <div class="modal-overlay">
 
-        <h3>Registrar Nuevo Ingreso</h3>
+  <div class="modal-card">
 
-        <p style="color: #888; font-size: 0.85rem; margin-bottom: 20px;">
-          Ingresa los detalles de la entrada de dinero.
-        </p>
+    <h3>Registrar Nuevo Ingreso</h3>
 
-        <div style="margin-bottom: 15px;">
-          <label>Descripción</label>
+    <p class="descripcion-modal">
+      Ingresa los detalles de la entrada de dinero.
+    </p>
 
-          <input
-            type="text"
-            [(ngModel)]="descripcion"
-            placeholder="Ej. Venta, Salario..."
-            class="search-input-finora"
-          />
-        </div>
+    <form (ngSubmit)="guardar()">
 
-        <div style="margin-bottom: 15px;">
-          <label>Monto (Q.)</label>
+      <div class="campo">
+        <label for="descripcion">Descripción</label>
 
-          <input
-            type="number"
-            [(ngModel)]="monto"
-            placeholder="0.00"
-            class="search-input-finora"
-          />
-        </div>
+        <input
+          id="descripcion"
+          name="descripcion"
+          type="text"
+          [(ngModel)]="descripcion"
+          placeholder="Ej. Venta, Salario..."
+          class="input-finora"
+        />
+      </div>
 
-        <div style="margin-bottom: 20px;">
-          <label>Categoría</label>
+      <div class="campo">
+        <label for="monto">Monto (Q.)</label>
 
-          <select
-            [(ngModel)]="categoria"
-            class="search-input-finora"
-            style="background-color: #071714;"
-          >
+        <input
+          id="monto"
+          name="monto"
+          type="number"
+          step="0.01"
+          [(ngModel)]="monto"
+          placeholder="0.00"
+          class="input-finora"
+        />
+      </div>
 
-            <option value="Trabajo">Trabajo</option>
-            <option value="Freelance">Freelance</option>
-            <option value="Extra">Extra</option>
-            <option value="Inversión">Inversión</option>
+      <div class="campo">
+        <label for="fecha">Fecha</label>
 
-          </select>
-        </div>
+        <input
+          id="fecha"
+          name="fecha"
+          type="date"
+          [(ngModel)]="fecha"
+          class="input-finora"
+        />
+      </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <div class="campo">
+        <label for="categoria">Categoría</label>
 
-          <button
-            class="boton-accion"
-            (click)="cerrarModalLocal()"
-            style="background: transparent; border: 1px solid #13382d;">
-            Cancelar
-          </button>
+        <select
+          id="categoria"
+          name="categoria"
+          [(ngModel)]="categoria"
+          class="input-finora"
+        >
+          <option value="Trabajo">Trabajo</option>
+          <option value="Freelance">Freelance</option>
+          <option value="Extra">Extra</option>
+          <option value="Inversion">Inversión</option>
+        </select>
+      </div>
 
-          <button
-            class="boton-accion"
-            (click)="guardar()">
-            Guardar Ingreso
-          </button>
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
 
-        </div>
+      <div class="botones">
+
+        <button
+          type="button"
+          class="boton cancelar"
+          (click)="cerrarModalLocal()">
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="boton guardar"
+          [disabled]="guardando">
+          {{ guardando ? 'Guardando...' : 'Guardar Ingreso' }}
+        </button>
 
       </div>
 
-    </div>
-  `
-})
-export class ingresoComponent {
+    </form>
 
-  descripcion: string = '';
-  monto: number | null = null;
-  categoria: string = 'Trabajo';
+  </div>
 
-  @Output() cerrar = new EventEmitter<void>();
-  @Output() guardadoExitoso = new EventEmitter<void>();
+</div>
 
-  constructor(private http: HttpClient) {}
 
-  guardar() {
+`,
 
-    if (
-      !this.descripcion ||
-      this.monto === null ||
-      this.monto === undefined
-    ) {
-      alert('Por favor completa la descripción y el monto.');
-      return;
-    }
+styles: [`
 
-    const nuevo = {
-      descripcion: this.descripcion,
-      monto: Number(this.monto),
-      categoria: this.categoria,
-      fecha: new Date().toISOString().split('T')[0]
-    };
 
-    this.http
-      .post('http://localhost:3000/api/ingresos', nuevo)
-      .subscribe({
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-        next: () => {
-          this.guardadoExitoso.emit();
-          this.cerrarModalLocal();
-        },
+.modal-card {
+  width: 420px;
+  max-width: 100%;
+  background: #102f21;
+  border: 1px solid #1d4935;
+  border-radius: 16px;
+  padding: 28px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
 
-        error: (err: any) => {
-          console.error('Error al guardar el ingreso:', err);
-          alert('No se pudo guardar el ingreso.');
-        }
+.modal-card h3 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+}
 
-      });
+.descripcion-modal {
+  margin: 8px 0 22px;
+  color: #8fa39a;
+  font-size: 14px;
+}
+
+.campo {
+  margin-bottom: 16px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 7px;
+  color: #d9e5df;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.input-finora {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  box-sizing: border-box;
+
+  background: #071714;
+  border: 1px solid #1d4935;
+  border-radius: 8px;
+
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-finora:focus {
+  border-color: #138a5e;
+  box-shadow: 0 0 0 2px rgba(19, 138, 94, 0.15);
+}
+
+.input-finora::placeholder {
+  color: #71857c;
+}
+
+select.input-finora {
+  cursor: pointer;
+}
+
+.error {
+  margin: 5px 0 15px;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+.botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.boton {
+  padding: 11px 17px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancelar {
+  background: transparent;
+  border: 1px solid #1d4935;
+  color: #c5d2cc;
+}
+
+.cancelar:hover {
+  background: #0c2519;
+}
+
+.guardar {
+  background: #138a5e;
+  border: 1px solid #138a5e;
+  color: white;
+}
+
+.guardar:hover {
+  background: #16a66f;
+}
+
+.guardar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+
+  .modal-card {
+    padding: 22px;
   }
 
-  cerrarModalLocal() {
+  .botones {
+    flex-direction: column;
+  }
 
-    this.descripcion = '';
-    this.monto = null;
-    this.categoria = 'Trabajo';
+  .boton {
+    width: 100%;
+  }
 
-    this.cerrar.emit();
+}
+`]
+})
+
+export class ingresoComponent {
+
+private ingresoService = inject(IngresoService);
+
+descripcion = '';
+monto: number | null = null;
+categoria = 'Trabajo';
+fecha = new Date().toISOString().split('T')[0];
+
+guardando = false;
+error: string | null = null;
+
+@Output() cerrar = new EventEmitter<void>();
+
+@Output() guardadoExitoso = new EventEmitter<Ingreso>();
+
+guardar(): void {
+
+this.error = null;
+
+if (!this.descripcion.trim()) {
+  this.error = 'La descripción es obligatoria.';
+  return;
+}
+
+if (
+  this.monto === null ||
+  this.monto === undefined ||
+  Number(this.monto) <= 0
+) {
+  this.error = 'Ingresa un monto mayor a cero.';
+  return;
+}
+
+this.guardando = true;
+
+this.ingresoService.crear({
+  descripcion: this.descripcion.trim(),
+  monto: Number(this.monto),
+  categoria: this.categoria,
+  fecha: this.fecha
+}).subscribe({
+
+  next: (creado) => {
+
+    this.guardando = false;
+
+    this.guardadoExitoso.emit(creado);
+
+    this.limpiarFormulario();
+  },
+
+  error: (err) => {
+
+    this.guardando = false;
+
+    this.error =
+      err?.error?.mensaje ??
+      'No se pudo guardar el ingreso. Intenta de nuevo.';
+
+    console.error(
+      'Error al guardar el ingreso:',
+      err
+    );
+  }
+
+});
+
+
+}
+
+cerrarModalLocal(): void {
+
+
+this.limpiarFormulario();
+
+this.cerrar.emit();
+
+
+}
+
+private limpiarFormulario(): void {
+
+this.descripcion = '';
+this.monto = null;
+this.categoria = 'Trabajo';
+this.fecha = new Date().toISOString().split('T')[0];
+this.error = null;
+
   }
 }

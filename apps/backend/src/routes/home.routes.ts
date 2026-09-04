@@ -1,9 +1,9 @@
-import { Router, type IRouter } from "express";
-import { obtenerResumenHome } from "../controllers/homecontroller.js";
-import { authenticateToken } from "../middlewares/auth.middleware.js";
+import { Router } from 'express';
+import { authenticateToken } from '../middlewares/auth.middleware.js';
+import { obtenerResumenHome } from '../controllers/home.controller.js';
 
-const router: IRouter = Router();
+const router: Router = Router();
 
-router.get("/resumen", authenticateToken, obtenerResumenHome);
+router.get('/', authenticateToken, obtenerResumenHome);
 
 export default router;
