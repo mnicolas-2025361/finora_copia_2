@@ -79,7 +79,7 @@ export async function registerUser(data: RegisterData) {
         expiresIn: "1d"
         }
     );
-
+    
     return {
         token,
         user: {

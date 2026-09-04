@@ -1,0 +1,81 @@
+<div class="ingresos-page">
+
+  <div class="encabezado">
+    <div>
+      <h1>Ingresos</h1>
+      <p>Administra y consulta tus ingresos</p>
+    </div>
+
+<button class="btn-agregar" (click)="abrirModal()">
+  + Agregar ingreso
+</button>
+
+  </div>
+
+  <div class="resumen">
+
+<div class="tarjeta">
+  <span>Total de ingresos</span>
+  <h2>Q{{ totalIngresos | number:'1.2-2' }}</h2>
+</div>
+
+<div class="tarjeta">
+  <span>Ingresos de este mes</span>
+  <h2>Q{{ ingresoMes | number:'1.2-2' }}</h2>
+</div>
+
+<div class="tarjeta">
+  <span>Cantidad de ingresos</span>
+  <h2>{{ ingresos.length }}</h2>
+</div>
+
+  </div>
+
+  <div class="contenido">
+
+<div class="titulo-lista">
+  <h2>Lista de ingresos</h2>
+</div>
+
+<div *ngIf="cargando" class="mensaje">
+  Cargando ingresos...
+</div>
+
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+<div *ngIf="!cargando && !error && ingresos.length === 0" class="mensaje">
+  No tienes ingresos registrados.
+</div>
+
+<div class="lista" *ngIf="!cargando && ingresos.length > 0">
+
+  <div class="ingreso" *ngFor="let ingreso of ingresos">
+
+    <div class="info">
+      <h3>{{ ingreso.descripcion }}</h3>
+      <p>{{ ingreso.fecha | date:'dd/MM/yyyy' }}</p>
+    </div>
+
+    <div class="monto">
+      + Q{{ ingreso.monto | number:'1.2-2' }}
+    </div>
+
+    <button
+      class="btn-eliminar"
+      (click)="eliminarIngreso(ingreso.id)">
+      Eliminar
+    </button>
+
+  </div>
+
+</div>
+
+  </div>
+
+<app-nuevo-ingreso
+  *ngIf="mostrarModal"
+  (cerrar)="cerrarModal()"
+  (guardadoExitoso)="ingresoGuardado($event)">
+</app-nuevo-ingreso>
