@@ -1,76 +1,57 @@
-  import { Component, AfterViewInit } from '@angular/core';
-  import { CommonModule } from '@angular/common'; 
-  import { HttpClient } from '@angular/common/http';
-  import { RouterLink, Router } from '@angular/router'; // 1. Importado Router
-  import Chart from 'chart.js/auto';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; // 1. Importa el Router
+import { IngresoService, Ingreso } from '../../services/ingreso.service.js';
 
-  @Component({
-    selector: 'app-home',
-    imports: [CommonModule, RouterLink], 
-    templateUrl: './home.html',
-    styleUrl: './home.css'
-  })
-  export class Home implements AfterViewInit {
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './home.html',
+  styleUrl: './home.css'
+})
+export class HomeComponent implements OnInit {
+  private ingresoService = inject(IngresoService);
+  private router = inject(Router); // 2. Inyecta el Router
 
-    presupuesto = 0;
-    gastado = 0;
-    chart: any;
+  ingresos: Ingreso[] = [];
+  ingresoMes = 0;
+  cargando = false;
 
-    // 2. Inyectado Router en el constructor
-    constructor(private http: HttpClient, private router: Router) {}
-
-    ngAfterViewInit(): void {
-      this.obtenerDatosDeBaseDeDatos();
-    }
-
-    obtenerDatosDeBaseDeDatos() {
-      const apiUrl = 'http://localhost:3000/api/home/resumen'; 
-
-      this.http.get<any>(apiUrl).subscribe({
-        next: (datos) => {
-          this.presupuesto = datos.presupuesto;
-          this.gastado = datos.gastado;
-          this.crearGrafica();
-        },
-        error: (err) => {
-          console.error('Error al obtener datos de la base de datos:', err);
-        }
-      });
-    }
-
-    crearGrafica() {
-      const disponible = this.presupuesto - this.gastado;
-
-      if (this.chart) {
-        this.chart.destroy();
-      }
-
-      this.chart = new Chart('presupuestoChart', {
-        type: 'doughnut',
-        data: {
-          labels: ['Gastado', 'Disponible'],
-          datasets: [{
-            data: [this.gastado, disponible],
-            backgroundColor: [
-              '#4fd1a1',
-              '#9b6de3'
-            ],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          cutout: '65%',
-          plugins: {
-            legend: {
-              display: false
-            }
-          }
-        }
-      });
-    }
-
-    // 3. Función añadida para la redirección
-    irANuevoIngreso() {
-      this.router.navigate(['/ingresos']);
-    }
+  ngOnInit(): void {
+    this.cargarDatosDashboard();
   }
+
+  cargarDatosDashboard(): void {
+    this.cargando = true;
+    this.ingresoService.listar().subscribe({
+      next: (data) => {
+        this.ingresos = data;
+        this.calcularIngresoMes();
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar ingresos en el dashboard:', err);
+        this.cargando = false;
+      }
+    });
+  }
+
+  calcularIngresoMes(): void {
+    const ahora = new Date();
+    const mesActual = ahora.getMonth();
+    const anioActual = ahora.getFullYear();
+
+    this.ingresoMes = this.ingresos
+      .filter((ingreso) => {
+        const fecha = new Date(ingreso.fecha);
+        return fecha.getMonth() === mesActual && fecha.getFullYear() === anioActual;
+      })
+      .reduce((total, ingreso) => total + Number(ingreso.monto), 0);
+  }
+
+  // 3. Método que le da vida al botón del HTML para ir a la vista de ingresos
+  irANuevoIngreso(): void {
+    this.router.navigate(['/ingresos']);
+  }
+}

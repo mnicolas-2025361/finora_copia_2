@@ -88,6 +88,26 @@ body {
   font-weight: bold;
 }
 
+/* Estilos adaptados para la tarjeta métrica dentro de .card */
+.tarjeta-metrica {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-metrica {
+  color: #8fa89b;
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.monto-metrica {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
 /* Sección Central (Listas y Gráfica) */
 .resumenes {
   display: flex;
